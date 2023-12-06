@@ -296,6 +296,23 @@ class Window:
         scale = dpg.create_scale_matrix([self.zoom, self.zoom])
         dpg.apply_transform("Canvas", screen_center*scale*translate)
 
+    # MEU CODIGO
+    def draw_light(self):
+            for light in self.simulation.lights:
+                position = light.position
+                node = dpg.add_draw_node(parent="Canvas")
+                dpg.draw_circle(
+                    (0, 0),
+                    radius=1.5*self.zoom,
+                    thickness=1.0*self.zoom,
+                    color=(0, 0, 0) if light.state == "red" else (0, 255, 0),  # Choose color based on light state
+                    segments=20,
+                    parent=node
+                )
+
+                translate = dpg.create_translation_matrix(position)
+                dpg.apply_transform(node, translate)
+
 
     def render_loop(self):
         # Events

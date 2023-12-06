@@ -2,14 +2,22 @@ from .vehicle_generator import VehicleGenerator
 from .geometry.quadratic_curve import QuadraticCurve
 from .geometry.cubic_curve import CubicCurve
 from .geometry.segment import Segment
+from .geometry.straight_segment import StraightSegment
 from .vehicle import Vehicle
+
+# LIGHT
+from .traffic_light import TrafficLight
 
 
 class Simulation:
+
     def __init__(self):
         self.segments = []
         self.vehicles = {}
         self.vehicle_generator = []
+        
+        # LIGHT
+        self.lights = []
 
         self.t = 0.0
         self.frame_count = 0
@@ -27,13 +35,17 @@ class Simulation:
     def add_vehicle_generator(self, gen):
         self.vehicle_generator.append(gen)
 
+    # LIGHT
+    def add_light(self, light):
+        self.lights.append(light)
+
     
     def create_vehicle(self, **kwargs):
         veh = Vehicle(kwargs)
         self.add_vehicle(veh)
 
-    def create_segment(self, *args):
-        seg = Segment(args)
+    def create_segment(self, start, end):
+        seg = StraightSegment(start, end)
         self.add_segment(seg)
 
     def create_quadratic_bezier_curve(self, start, control, end):
@@ -47,6 +59,11 @@ class Simulation:
     def create_vehicle_generator(self, **kwargs):
         gen = VehicleGenerator(kwargs)
         self.add_vehicle_generator(gen)
+    
+    # LIGHT
+    def create_traffic_light(self, **kwargs):
+        lig = TrafficLight(kwargs)
+        self.add_light(lig)
 
 
     def run(self, steps):
