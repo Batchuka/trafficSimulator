@@ -298,21 +298,17 @@ class Window:
 
     # LIGHT
     def draw_light(self):
-        for segment in self.segments:
-            for light in segment.lights:
-                position = light.position
-                node = dpg.add_draw_node(parent="Canvas")
-                dpg.draw_circle(
-                    (0, 0),
-                    radius=1.5 * self.zoom,
-                    thickness=1.0 * self.zoom,
-                    color=(0, 0, 0) if light.state == "red" else (0, 255, 0),
-                    segments=20,
-                    parent=node
-                )
-
-                translate = dpg.create_translation_matrix(position)
-                dpg.apply_transform(node, translate)
+        for light in self.simulation.lights:
+            position = light.position
+            node = dpg.add_draw_node(parent="Canvas")
+            dpg.draw_circle(
+                position,
+                radius=1.5 * self.zoom,
+                thickness=1.0 * self.zoom,
+                color=(0, 0, 0) if light.state == "red" else (0, 255, 0),
+                segments=20,
+                parent=node
+            )
 
 
     def render_loop(self):
@@ -330,6 +326,7 @@ class Window:
         self.draw_grid(unit=10)
         self.draw_grid(unit=50)
         self.draw_segments()
+        self.draw_light()
         self.draw_vehicles()
 
         # Apply transformations
