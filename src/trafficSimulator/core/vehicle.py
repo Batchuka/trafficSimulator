@@ -2,6 +2,7 @@ import uuid
 import numpy as np
 
 class Vehicle:
+    
     def __init__(self, config={}):
         # Set default configuration
         self.set_default_config()

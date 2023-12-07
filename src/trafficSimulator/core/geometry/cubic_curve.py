@@ -3,6 +3,7 @@ from .segment import Segment
 CURVE_RESOLUTION = 50
 
 class CubicCurve(Segment):
+    
     def __init__(self, start, control_1, control_2, end):
         # Store characteristic points
         self.start = start

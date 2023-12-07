@@ -61,8 +61,8 @@ class Simulation:
         self.add_vehicle_generator(gen)
     
     # LIGHT
-    def create_traffic_light(self, **kwargs):
-        lig = TrafficLight(kwargs)
+    def create_traffic_light(self, position, green_time, red_time):
+        lig = TrafficLight(position, green_time, red_time)
         self.add_light(lig)
 
 
@@ -97,11 +97,16 @@ class Simulation:
                 # Reset vehicle properties
                 vehicle.x = 0
                 # In all cases, remove it from its road
-                segment.vehicles.popleft() 
+                segment.vehicles.popleft()
+        
+        # Update traffic lights
+        for light in self.lights:
+            light.update(self.dt)
 
         # Update vehicle generators
         for gen in self.vehicle_generator:
             gen.update(self)
+        
         # Increment time
         self.t += self.dt
         self.frame_count += 1

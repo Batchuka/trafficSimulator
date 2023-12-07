@@ -11,6 +11,7 @@ class Segment(ABC):
     def __init__(self, points):
         self.points = points
         self.vehicles = deque()
+        self.lights = []
 
         self.set_functions()
         
@@ -37,6 +38,9 @@ class Segment(ABC):
 
     def add_vehicle(self, veh):
         self.vehicles.append(veh.id)
+
+    def add_light(self, light):
+        self.lights.append(light)
 
     def remove_vehicle(self, veh):
         self.vehicles.remove(veh.id)
