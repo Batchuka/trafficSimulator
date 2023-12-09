@@ -8,6 +8,9 @@ from .vehicle import Vehicle
 # LIGHT
 from .traffic_light import TrafficLight
 
+# TABLE_POSITION
+from .position_table import PositionTable
+
 
 class Simulation:
 
@@ -18,6 +21,9 @@ class Simulation:
         
         # LIGHT
         self.lights = []
+
+        # POSITION TABLE
+        self.position_table = PositionTable(self)
 
         self.t = 0.0
         self.frame_count = 0
@@ -67,16 +73,26 @@ class Simulation:
 
 
     def run(self, steps):
+
+        # # all IDs must be enabled for this to work
+        # self.position_table.start_thread()
+
         for _ in range(steps):
             self.update()
+            # self.position_table.update_distances()
 
     def update(self):
+
         # Update vehicles
         for segment in self.segments:
             if len(segment.vehicles) != 0:
                 self.vehicles[segment.vehicles[0]].update(None, self.dt)
             for i in range(1, len(segment.vehicles)):
                 self.vehicles[segment.vehicles[i]].update(self.vehicles[segment.vehicles[i-1]], self.dt)
+        
+        # Update traffic lights
+        for light in self.lights:
+            light.update(self.dt)
 
         # Check roads for out of bounds vehicle
         for segment in self.segments:
@@ -98,10 +114,6 @@ class Simulation:
                 vehicle.x = 0
                 # In all cases, remove it from its road
                 segment.vehicles.popleft()
-        
-        # Update traffic lights
-        for light in self.lights:
-            light.update(self.dt)
 
         # Update vehicle generators
         for gen in self.vehicle_generator:

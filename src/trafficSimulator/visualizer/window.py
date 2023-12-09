@@ -78,6 +78,7 @@ class Window:
             no_resize=True,
             no_move=True
         ):
+            
             with dpg.collapsing_header(label="Simulation Control", default_open=True):
 
                 with dpg.group(horizontal=True):
@@ -103,8 +104,7 @@ class Window:
                     with dpg.table_row():
                         dpg.add_text("Frame:")
                         dpg.add_text("_", tag="FrameStatus")
-            
-            
+             
             with dpg.collapsing_header(label="Camera Control", default_open=True):
     
                 dpg.add_slider_float(tag="ZoomSlider", label="Zoom", min_value=0.1, max_value=100, default_value=self.zoom,callback=self.set_offset_zoom)            
@@ -112,6 +112,9 @@ class Window:
                     dpg.add_slider_float(tag="OffsetXSlider", label="X Offset", min_value=-100, max_value=100, default_value=self.offset[0], callback=self.set_offset_zoom)
                     dpg.add_slider_float(tag="OffsetYSlider", label="Y Offset", min_value=-100, max_value=100, default_value=self.offset[1], callback=self.set_offset_zoom)
 
+
+    
+    
     def resize_windows(self):
         width = dpg.get_viewport_width()
         height = dpg.get_viewport_height()

@@ -2,7 +2,7 @@ import uuid
 import numpy as np
 
 class Vehicle:
-    
+
     def __init__(self, config={}):
         # Set default configuration
         self.set_default_config()
@@ -13,6 +13,9 @@ class Vehicle:
 
         # Calculate properties
         self.init_properties()
+
+        # Adiciona o atributo obstacle
+        self.obstacle = True
         
     def set_default_config(self):    
         self.id = uuid.uuid4()

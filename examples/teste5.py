@@ -49,12 +49,6 @@ sim.add_vehicle_generator(vg)
 
 
 
-# v = Vehicle({'path': [0], 'x': 20, 'v':16.6})
-# sim.add_vehicle(v)
-
-# v = Vehicle({'path': [0]})
-# sim.add_vehicle(v)
-
 win = Window(sim)
 win.run()
 win.show()
