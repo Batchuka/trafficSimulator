@@ -33,6 +33,7 @@ sim.create_quadratic_bezier_curve((lane_space/2, intersection_size/2), (lane_spa
 sim.create_quadratic_bezier_curve((intersection_size/2, -lane_space/2), (-lane_space/2, -lane_space/2), (-lane_space/2, intersection_size/2))
 sim.create_quadratic_bezier_curve((-lane_space/2, -intersection_size/2), (-lane_space/2, lane_space/2), (intersection_size/2, lane_space/2))
 sim.create_quadratic_bezier_curve((-intersection_size/2, lane_space/2), (lane_space/2, lane_space/2), (lane_space/2, -intersection_size/2))
+
 # Traffic Lights
 sim.create_traffic_light(position=(lane_space/2, length/8), green_time=10, red_time=5)  # South
 sim.create_traffic_light(position=(length/8, -lane_space/2), green_time=15, red_time=7)  # East
